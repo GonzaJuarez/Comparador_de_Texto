@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class ManejadorArchivosGenerico {
 
@@ -23,6 +24,25 @@ public class ManejadorArchivosGenerico {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < listaLineasArchivo.length; i++) {
                 String lineaActual = listaLineasArchivo[i];
+                bw.write(lineaActual);
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error al escribir el archivo "
+                    + nombreCompletoArchivo);
+            e.printStackTrace();
+        }
+    }
+
+    public static void escribirArchivo2 (String nombreCompletoArchivo,
+                                         Set<String> listaLineasArchivo) {
+        FileWriter fw;
+        try {
+            fw = new FileWriter(nombreCompletoArchivo, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (String lineaActual : listaLineasArchivo) {
                 bw.write(lineaActual);
                 bw.newLine();
             }
